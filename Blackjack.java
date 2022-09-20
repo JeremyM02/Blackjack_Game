@@ -33,7 +33,7 @@ public class Blackjack
 
             if (action == 1){
                 System.out.println("\nThe stakes are high!");
-                
+
                 int bet = 0;
                 while (true){
                     System.out.println("How many coins do you want to bet? (You have " + coins + " Coins)");
@@ -44,7 +44,7 @@ public class Blackjack
                         System.out.println("You can't bet that much.");
                     }
                 }
-                
+
                 String gameResult = playRound();
 
                 if (gameResult.equals("win")){
@@ -74,7 +74,7 @@ public class Blackjack
                 break;
             }
         }
-        
+
         System.out.println("\n----------------------------------------");
         System.out.println("----------------------------------------");
         System.out.println("GAME OVER");
@@ -102,6 +102,9 @@ public class Blackjack
             System.out.println("S Rank (3000 to ????) - Master");
         } else if (coins >= 6400){
             System.out.println("S+ Rank (6400+) - Legend");
+            if (coins > 1000000){
+                System.out.println("You are a millionare!");
+            }
         }
     }
 
@@ -157,32 +160,33 @@ public class Blackjack
             }
 
         }
-        System.out.println("\nThe dealer's 2nd card was " + dealerHand.getLastCard());
         if (playerHand.getRealTotal() < 21){
+            System.out.println("\nThe dealer's 2nd card was " + dealerHand.getLastCard());
+
             //DEALER PHASE
             System.out.println();
             System.out.println("It's dealer time");
             if (dealerHand.getRealTotal() < 17){
+                System.out.println("[THE DEALER HITS]");
                 while(dealerHand.getRealTotal() < 17){
-                    System.out.println("\n[THE DEALER HITS]");
                     dealerHand.hit();
                     dealerHand.displayHandStats();
                 }
-                System.out.println("\n[THE DEALER IS DONE]");
+                System.out.println("[THE DEALER IS DONE]");
             } else {
                 System.out.println("[THE DEALER DOES NOT HIT]");
             }
-        }
 
-        //END PHASE
-        System.out.println();
-        System.out.println("HERE ARE THE RESULTS");
-        playerHand.displayHandStats();
-        dealerHand.displayHandStats();
+            //END PHASE
+            System.out.println();
+            System.out.println("HERE ARE THE RESULTS");
+            playerHand.displayHandStats();
+            dealerHand.displayHandStats();
+
+        }
 
         int playerTotal = playerHand.getRealTotal();
         int dealerTotal = dealerHand.getRealTotal();
-
         if (playerHand.isSafe() == false){
             playerTotal = 0;    
         }
